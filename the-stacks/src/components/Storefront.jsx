@@ -1,5 +1,5 @@
-import React from "react";
-import { Search, ShoppingCart, Lock, RefreshCcw, Info } from "lucide-react";
+import React, { useState } from "react";
+import { Search, ShoppingCart, Lock, RefreshCcw, Info, Menu, X } from "lucide-react";
 import { CATEGORIES, catByKey } from "../data/categories.js";
 import ProductCard from "./ProductCard.jsx";
 
@@ -7,28 +7,37 @@ export default function Storefront({
   activeCat, setActiveCat, query, setQuery, catCounts, filtered, loading,
   cartCount, onOpenCart, onGoToGate, onOpenDetail, onAddToCart,
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
       <header className="hdr">
         <div className="hdr-row">
           <div className="logo">StarkNova<small>Est. Circulation · Vol. 01</small></div>
-          <nav className="tabs">
-            <button className={`tab ${activeCat === "all" ? "active" : ""}`} onClick={() => setActiveCat("all")}>All</button>
-            {CATEGORIES.map((c) => (
-              <button key={c.key} className={`tab ${activeCat === c.key ? "active" : ""}`} onClick={() => setActiveCat(c.key)}>
-                {c.label}
-              </button>
-            ))}
-          </nav>
-          <div className="search-box">
-            <Search size={14} color="var(--text-muted)" />
-            <input placeholder="Search titles, creators…" value={query} onChange={(e) => setQuery(e.target.value)} />
-          </div>
-          <button className="icon-btn" onClick={onOpenCart}>
-            <ShoppingCart size={17} />
-            {cartCount > 0 && <span className="badge">{cartCount}</span>}
+          <button className="hamburger" onClick={() => setMenuOpen((o) => !o)} aria-label="Toggle menu">
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <button className="staff-link" onClick={onGoToGate}><Lock size={12} /> Staff Entrance</button>
+          <div className={`hdr-mobile ${menuOpen ? "open" : ""}`}>
+            <nav className="tabs">
+              <button className={`tab ${activeCat === "all" ? "active" : ""}`} onClick={() => { setActiveCat("all"); setMenuOpen(false); }}>All</button>
+              {CATEGORIES.map((c) => (
+                <button key={c.key} className={`tab ${activeCat === c.key ? "active" : ""}`} onClick={() => { setActiveCat(c.key); setMenuOpen(false); }}>
+                  {c.label}
+                </button>
+              ))}
+            </nav>
+            <div className="search-box">
+              <Search size={14} color="var(--text-muted)" />
+              <input placeholder="Search titles, creators…" value={query} onChange={(e) => setQuery(e.target.value)} />
+            </div>
+            <div className="hdr-actions">
+              <button className="icon-btn" onClick={onOpenCart}>
+                <ShoppingCart size={17} />
+                {cartCount > 0 && <span className="badge">{cartCount}</span>}
+              </button>
+              <button className="staff-link" onClick={onGoToGate}><Lock size={12} /> Staff Entrance</button>
+            </div>
+          </div>
         </div>
       </header>
 
