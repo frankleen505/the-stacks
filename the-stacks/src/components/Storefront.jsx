@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Search, ShoppingCart, Lock, RefreshCcw, Info, Menu, X } from "lucide-react";
 import { CATEGORIES, catByKey } from "../data/categories.js";
 import ProductCard from "./ProductCard.jsx";
@@ -8,9 +8,17 @@ export default function Storefront({
   cartCount, onOpenCart, onGoToGate, onOpenDetail, onAddToCart,
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    if (menuOpen && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [menuOpen]);
 
   return (
     <>
+      <div className={`menu-overlay ${menuOpen ? "visible" : ""}`} onClick={() => setMenuOpen(false)} />
       <header className="hdr">
         <div className="hdr-row">
           <div className="logo">StarkNova<small>Est. Circulation · Vol. 01</small></div>
@@ -28,7 +36,7 @@ export default function Storefront({
             </nav>
             <div className="search-box">
               <Search size={14} color="var(--text-muted)" />
-              <input placeholder="Search titles, creators…" value={query} onChange={(e) => setQuery(e.target.value)} />
+              <input ref={searchRef} placeholder="Search titles, creators…" value={query} onChange={(e) => setQuery(e.target.value)} />
             </div>
             <button className="icon-btn" onClick={onOpenCart}>
               <ShoppingCart size={17} />
