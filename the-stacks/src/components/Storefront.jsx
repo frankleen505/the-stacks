@@ -16,6 +16,16 @@ export default function Storefront({
     }
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [menuOpen]);
+
   return (
     <>
       <div className={`menu-overlay ${menuOpen ? "visible" : ""}`} onClick={() => setMenuOpen(false)} />
