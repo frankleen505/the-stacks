@@ -259,4 +259,7 @@ table.stacks-table tr:hover td { background:rgba(255,255,255,0.02); }
   .qty-ctrl button { padding:2px; }
   .card-body { padding:8px 8px 10px; }
   .btn { font-size:11.5px; padding:7px 8px; }
+  .search-box input { font-size:11px; padding:6px 10px; }
+  .field { margin-bottom:10px; }
+  form .field-grid-3 { gap:8px; }
 }
