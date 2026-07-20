@@ -22,7 +22,7 @@ html, body { overflow-x: hidden; }
 .eyebrow { font-family:var(--font-mono); letter-spacing:.14em; text-transform:uppercase; font-size:11px; color:var(--text-muted); }
 
 /* ---------------- mobile menu overlay ---------------- */
-.menu-overlay { display:none; position:fixed; inset:0; z-index:39; background:rgba(6,8,14,0.4); }
+.menu-overlay { display:none; position:fixed; inset:0; z-index:35; background:rgba(6,8,14,0.4); }
 .menu-overlay.visible { display:block; }
 
 /* ---------------- header ---------------- */
@@ -30,8 +30,8 @@ html, body { overflow-x: hidden; }
 .hdr-row { max-width:1180px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; gap:24px; }
 .logo { font-family:var(--font-display); font-style:italic; font-weight:600; font-size:24px; letter-spacing:.01em; white-space:nowrap; }
 .logo small { display:block; font-family:var(--font-mono); font-style:normal; font-size:10px; letter-spacing:.16em; color:var(--text-muted); margin-top:2px; }
-.hamburger { display:none; background:none; border:none; color:var(--text); padding:6px; }
-.cart-fab { display:none; position:relative; background:var(--ink-800); border:1px solid var(--ink-line); border-radius:8px; padding:8px; color:var(--text); }
+.hamburger { display:none; background:none; border:none; color:var(--text); padding:8px; border-radius:6px; min-width:36px; min-height:36px; }
+.cart-fab { display:none; position:relative; background:var(--ink-800); border:1px solid var(--ink-line); border-radius:8px; padding:8px; color:var(--text); min-width:36px; min-height:36px; }
 .cart-fab:hover { border-color:var(--marigold); }
 .hdr-mobile { display:flex; align-items:center; flex:1; gap:24px; }
 .tabs { display:flex; gap:4px; flex:1; overflow-x:auto; }
@@ -43,8 +43,11 @@ html, body { overflow-x: hidden; }
 .icon-btn { position:relative; background:var(--ink-800); border:1px solid var(--ink-line); border-radius:8px; padding:8px; display:flex; color:var(--text); }
 .icon-btn:hover { border-color:var(--marigold); }
 .badge { position:absolute; top:-6px; right:-6px; background:var(--marigold); color:var(--text-dark); font-family:var(--font-mono); font-size:10px; font-weight:700; border-radius:10px; min-width:18px; height:18px; display:flex; align-items:center; justify-content:center; padding:0 4px; }
-.staff-link { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; display:flex; align-items:center; gap:5px; white-space:nowrap; border:1px solid var(--ink-line); border-radius:8px; padding:8px 10px; background:var(--ink-800); }
+.staff-link { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; display:flex; align-items:center; gap:5px; white-space:nowrap; border:1px solid var(--ink-line); border-radius:8px; padding:10px 12px; background:var(--ink-800); min-height:40px; }
 .staff-link:hover { color:var(--text); border-color:var(--teal); }
+.icon-btn { position:relative; background:var(--ink-800); border:1px solid var(--ink-line); border-radius:8px; padding:10px; display:flex; color:var(--text); min-width:40px; min-height:40px; }
+.icon-btn:hover { border-color:var(--marigold); }
+hamburger,hamburger * { pointer-events:auto !important; }
 
 /* ---------------- hero ---------------- */
 .hero { max-width:1180px; margin:0 auto; padding:64px 24px 40px; position:relative; }
@@ -183,7 +186,7 @@ table.stacks-table tr:hover td { background:rgba(255,255,255,0.02); }
   .hdr-mobile .tabs { width:100%; flex-wrap:wrap; overflow-x:visible; }
   .hdr-mobile .tabs .tab { flex:1; text-align:center; border-bottom:1px solid var(--ink-line); border-radius:6px; padding:10px 8px; }
   .hdr-mobile .search-box { min-width:0; }
-  .cart-fab ~ .hdr-mobile .icon-btn { display:none; }
+  .hdr-mobile .icon-btn { display:flex; order:3; width:100%; justify-content:center; }
   .hdr-mobile .staff-link { justify-content:center; }
   .hdr-row { flex-wrap:wrap; }
 
