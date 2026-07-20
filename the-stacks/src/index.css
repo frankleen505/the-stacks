@@ -29,7 +29,7 @@ html, body { overflow-x: hidden; }
 .hamburger { display:none; background:none; border:none; color:var(--text); padding:6px; }
 .cart-fab { display:none; position:relative; background:var(--ink-800); border:1px solid var(--ink-line); border-radius:8px; padding:8px; color:var(--text); }
 .cart-fab:hover { border-color:var(--marigold); }
-.hdr-mobile { display:flex; align-items:center; flex:1; }
+.hdr-mobile { display:flex; align-items:center; flex:1; gap:24px; }
 .tabs { display:flex; gap:4px; flex:1; overflow-x:auto; }
 .tab { font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; padding:9px 14px 7px; border:1px solid var(--ink-line); border-bottom:none; border-radius:6px 6px 0 0; background:var(--ink-800); color:var(--text-muted); white-space:nowrap; transition:all .15s; }
 .tab.active { background:var(--parchment); color:var(--text-dark); border-color:var(--parchment); font-weight:600; }
@@ -179,12 +179,11 @@ table.stacks-table tr:hover td { background:rgba(255,255,255,0.02); }
   .hdr-mobile .tabs { order:0; width:100%; flex-wrap:wrap; overflow-x:visible; }
   .hdr-mobile .tabs .tab { flex:1; text-align:center; border-bottom:1px solid var(--ink-line); border-radius:6px; padding:10px 8px; }
   .hdr-mobile .search-box { order:1; min-width:0; }
-  .hdr-mobile .icon-btn { order:2; width:100%; justify-content:center; }
-  .hdr-mobile .staff-link { order:3; justify-content:center; }
+  .cart-fab ~ .hdr-mobile .icon-btn { display:none; }
+  .hdr-mobile .staff-link { order:2; justify-content:center; }
   .hdr-row { flex-wrap:wrap; }
   .hdr-row > .tabs,
   .hdr-row > .search-box,
-  .hdr-row > .icon-btn,
   .hdr-row > .staff-link { display:none; }
 
   .office-bar { flex-direction:column; align-items:stretch; gap:8px; }
