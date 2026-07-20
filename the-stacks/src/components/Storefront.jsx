@@ -30,14 +30,16 @@ export default function Storefront({
               <Search size={14} color="var(--text-muted)" />
               <input placeholder="Search titles, creators…" value={query} onChange={(e) => setQuery(e.target.value)} />
             </div>
-            <div className="hdr-actions">
-              <button className="icon-btn" onClick={onOpenCart}>
-                <ShoppingCart size={17} />
-                {cartCount > 0 && <span className="badge">{cartCount}</span>}
-              </button>
-              <button className="staff-link" onClick={onGoToGate}><Lock size={12} /> Staff Entrance</button>
-            </div>
+            <button className="icon-btn" onClick={onOpenCart}>
+              <ShoppingCart size={17} />
+              {cartCount > 0 && <span className="badge">{cartCount}</span>}
+            </button>
+            <button className="staff-link" onClick={onGoToGate}><Lock size={12} /> Staff Entrance</button>
           </div>
+          <button className="cart-fab" onClick={onOpenCart}>
+            <ShoppingCart size={17} />
+            {cartCount > 0 && <span className="badge">{cartCount}</span>}
+          </button>
         </div>
       </header>
 
