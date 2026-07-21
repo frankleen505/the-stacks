@@ -10,7 +10,6 @@ export default function HeadLibrariansOffice({ staff, refreshStaff, notify, curr
   const canManage = currentUser.role === "manager" || currentUser.role === "admin";
   const canAddManager = currentUser.role === "admin";
   const isAdmin = currentUser.role === "admin";
-  // console.log("currentUser:", currentUser);
 
   async function setStatus(s, status) {
     if (s.role === "admin") { notify("The head librarian's account can't be changed."); return; }
@@ -50,6 +49,41 @@ export default function HeadLibrariansOffice({ staff, refreshStaff, notify, curr
     notify(`${target.name} is now the admin. You've been moved to manager.`);
   }
 
+  // Shared action buttons — used by both the desktop table row and the mobile card,
+  // so behavior never drifts between the two layouts.
+  function StaffActions({ s }) {
+    if (s.role === "admin") {
+      return <span className="mini-note">protected</span>;
+    }
+    return (
+      <div className="row-actions">
+        {isAdmin && (
+          <button className="btn btn-outline-teal btn-sm" onClick={() => setConfirmTransfer(s)}>
+            <Crown size={12} /> Make Admin
+          </button>
+        )}
+        {s.status !== "suspended" && (
+          <button className="btn btn-ghost btn-sm" onClick={() => setStatus(s, "suspended")}>
+            <PauseCircle size={12} /> Suspend
+          </button>
+        )}
+        {s.status !== "active" && (
+          <button className="btn btn-outline-teal btn-sm" onClick={() => setStatus(s, "active")}>
+            <PlayCircle size={12} /> Reactivate
+          </button>
+        )}
+        {s.status !== "banned" && (
+          <button className="btn btn-danger btn-sm" onClick={() => setStatus(s, "banned")}>
+            <Ban size={12} /> Ban
+          </button>
+        )}
+        <button className="btn btn-ghost btn-sm" onClick={() => setConfirmRemove(s)}>
+          <Trash2 size={12} /> Remove
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="office-body">
       <div className="office-head">
@@ -64,7 +98,8 @@ export default function HeadLibrariansOffice({ staff, refreshStaff, notify, curr
         )}
       </div>
 
-      <div className="table-wrap">
+      {/* Desktop / wide table */}
+      <div className="table-wrap staff-table-wrap">
         <table className="stacks-table">
           <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th></th></tr></thead>
           <tbody>
@@ -74,39 +109,30 @@ export default function HeadLibrariansOffice({ staff, refreshStaff, notify, curr
                 <td style={{ fontFamily: "var(--font-mono)" }}>{s.username}</td>
                 <td><span className={`role-pill ${s.role}`}>{s.role}</span></td>
                 <td><span className={`stamp ${s.status}`}>{s.status}</span></td>
-                <td>
-                  {s.role === "admin" ? (
-                    <span className="mini-note">protected</span>
-                  ) : (
-                    <div className="row-actions">
-                      {isAdmin && (
-                        <button className="btn btn-outline-teal btn-sm" onClick={() => setConfirmTransfer(s)}>
-                          <Crown size={12} /> Make Admin
-                        </button>
-                      )}
-                      {s.status !== "suspended" && (
-                        <button className="btn btn-ghost btn-sm" onClick={() => setStatus(s, "suspended")}>
-                          <PauseCircle size={12} /> Suspend
-                        </button>
-                      )}
-                      {s.status !== "active" && (
-                        <button className="btn btn-outline-teal btn-sm" onClick={() => setStatus(s, "active")}>
-                          <PlayCircle size={12} /> Reactivate
-                        </button>
-                      )}
-                      {s.status !== "banned" && (
-                        <button className="btn btn-danger btn-sm" onClick={() => setStatus(s, "banned")}>
-                          <Ban size={12} /> Ban
-                        </button>
-                      )}
-                      <button className="btn btn-ghost btn-sm" onClick={() => setConfirmRemove(s)}><Trash2 size={12} /></button>
-                    </div>
-                  )}
-                </td>
+                <td><StaffActions s={s} /></td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile: stacked cards instead of a squeezed table */}
+      <div className="staff-cards">
+        {staff.map((s) => (
+          <div className="staff-card" key={s.id}>
+            <div className="staff-card-top">
+              <div>
+                <div className="staff-card-name">{s.name}</div>
+                <div className="staff-card-username">{s.username}</div>
+              </div>
+              <div className="staff-card-tags">
+                <span className={`role-pill ${s.role}`}>{s.role}</span>
+                <span className={`stamp ${s.status}`}>{s.status}</span>
+              </div>
+            </div>
+            <StaffActions s={s} />
+          </div>
+        ))}
       </div>
 
       {draft && (
