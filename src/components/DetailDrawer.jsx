@@ -26,6 +26,8 @@ export default function DetailDrawer({ product, onClose, onAdd }) {
 
   if (!product) return null;
 
+  const hasTrailer = product.type === "movie" && product.trailerKey;
+
   return (
     <div className="full-detail-overlay" onClick={onClose}>
       <div className="full-detail-modal" onClick={(e) => e.stopPropagation()}>
@@ -34,11 +36,21 @@ export default function DetailDrawer({ product, onClose, onAdd }) {
         </button>
 
         <div className="full-detail-media">
-          <img
-            src={src}
-            onError={() => setSrc(placeholderCover(product.title, cat.color))}
-            alt={product.title}
-          />
+          {hasTrailer ? (
+            <iframe
+              className="full-detail-trailer"
+              src={`https://www.youtube.com/embed/${product.trailerKey}`}
+              title={`${product.title} trailer`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <img
+              src={src}
+              onError={() => setSrc(placeholderCover(product.title, cat.color))}
+              alt={product.title}
+            />
+          )}
         </div>
 
         <div className="full-detail-content">
