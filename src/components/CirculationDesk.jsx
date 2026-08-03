@@ -83,7 +83,7 @@ export default function CirculationDesk({ products, refresh, notify }) {
                   <div className="mini-note">{p.creator}</div>
                 </td>
                 <td><span className="eyebrow" style={{ color: catByKey[p.type].color }}>{catByKey[p.type].label}</span></td>
-                <td style={{ fontFamily: "var(--font-mono)" }}>${p.price.toFixed(2)}</td>
+                <td style={{ fontFamily: "var(--font-mono)" }}>₦{p.price.toFixed(2)}</td>
                 <td>{p.stock}</td>
                 <td>
                   <div className="row-actions">
@@ -134,7 +134,7 @@ export default function CirculationDesk({ products, refresh, notify }) {
             <div className="field"><label>Cover image URL (optional)</label><input value={draft.image} onChange={(e) => setDraft({ ...draft, image: e.target.value })} placeholder="https://…" /></div>
             <div className="field"><label>Description</label><textarea value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></div>
             <div className="field-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-              <div className="field"><label>Price ($)</label><input type="number" step="0.01" required value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} /></div>
+              <div className="field"><label>Price (₦)</label><input type="number" step="0.01" required value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} /></div>
               <div className="field"><label>Rating</label><input type="number" step="0.1" max="5" min="0" value={draft.rating} onChange={(e) => setDraft({ ...draft, rating: e.target.value })} /></div>
               <div className="field"><label>Stock</label><input type="number" value={draft.stock} onChange={(e) => setDraft({ ...draft, stock: e.target.value })} /></div>
             </div>

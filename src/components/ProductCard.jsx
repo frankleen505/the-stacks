@@ -30,7 +30,7 @@ export default function ProductCard({ product, onOpen, onAdd }) {
         <div className="card-creator">{product.creator}</div>
         <Stars value={product.rating} />
         <div className="card-foot">
-          <span className="price">${product.price.toFixed(2)}</span>
+          <span className="price">₦{product.price.toFixed(2)}</span>
           <button className="btn btn-primary btn-sm" onClick={() => onAdd(product)}>
             <ShoppingCart size={13} /> Check Out
           </button>

@@ -5,17 +5,17 @@ export function hashStr(s) {
 }
 
 export function formatPrice(amount) {
-  return `₦${amount.toFixed(2)}`;
+  return `₦{amount.toFixed(2)}`;
 }
 
 export function priceFor(type, seed) {
   const ranges = {
-    movie: [9.99, 24.99],
-    manga: [6.99, 12.99],
-    book: [8.99, 19.99],
-    comic: [3.99, 9.99],
+    movie: [3500, 9000],
+    manga: [1500, 3500],
+    book: [2500, 6000],
+    comic: [1200, 3000],
   };
-  const [lo, hi] = ranges[type] || [4.99, 14.99];
+  const [lo, hi] = ranges[type] || [2000, 5000];
   const t = (hashStr(seed) % 1000) / 1000;
   return Math.round((lo + t * (hi - lo)) * 100) / 100;
 }

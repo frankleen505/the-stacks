@@ -36,7 +36,7 @@ export default function CartDrawer({ open, cart, products, onClose, onQty, onRem
                     <div style={{ fontFamily: "var(--font-display)", fontSize: 14.5, fontWeight: 600 }}>
                       {i.product.title}
                     </div>
-                    <div className="mini-note">${i.product.price.toFixed(2)} each</div>
+                    <div className="mini-note">{i.product.price.toFixed(2)} each</div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8 }}>
                       <div className="qty-ctrl">
                         <button onClick={() => onQty(i.id, i.qty - 1)}><Minus size={12} /></button>
@@ -55,7 +55,7 @@ export default function CartDrawer({ open, cart, products, onClose, onQty, onRem
           <div className="drawer-foot">
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, fontFamily: "var(--font-mono)" }}>
               <span className="mini-note">Total</span>
-              <span className="price" style={{ fontSize: 18 }}>${total.toFixed(2)}</span>
+              <span className="price" style={{ fontSize: 18 }}>N{total.toFixed(2)}</span>
             </div>
             <button className="btn btn-primary" style={{ width: "100%", justifyContent: "center" }} onClick={onCheckout}>
               Complete Checkout
